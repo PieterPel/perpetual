@@ -136,12 +136,10 @@ if __name__ == "__main__":
 
     # https://www.openml.org/search?type=data&id=43493&sort=runs&status=active
     df = fetch_openml(data_id=43493)
-    cols_to_drop = ["title", "authors", "rank", "votes"]
-    y = df.data["rank"]
-    X = df.data.drop(columns=cols_to_drop)
+    cols_to_drop = ["title", "authors", "votes"]
+    data = df.data.drop(columns=cols_to_drop)
 
-    X["category"] = X["category"].astype("category")
-    X["published"] = X["published"].astype("category")
+    data["category"] = data["category"].astype("category")
+    data["published"] = data["published"].astype("category")
 
-    X.to_csv("resources/goodreads.csv", index=False, header=True)
-    y.to_csv("resources/goodreads_y.csv", index=False, header=True)
+    data.to_csv("resources/goodreads.csv", index=False, header=True)
